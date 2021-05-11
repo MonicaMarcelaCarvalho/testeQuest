@@ -1,0 +1,60 @@
+
+
+<mat-toolbar>
+    <mat-toolbar-row class="toolbar">
+        <img src="assets/images/cedro_technologies.png" class="img-fluid">
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="row panel-content">
+    <div class="form-question">
+        <h4 mat-dialog-title class="form-question-title" *ngIf="isVisibleForm()">{{ titlePage }}</h4>
+
+        <div class="col-12" *ngIf="isVisibleSucess()">
+            <div  class="alert alert-success">  
+                <b class="glyphicon glyphicon-ok'"></b>
+                    Cadastro foi realizado com sucesso!   
+                <a href="#" (click)="back()" class="float-right">VOLTAR</a>
+            </div>
+        </div>
+
+        <form class="form-question-form" [formGroup]="formGroup" (ngSubmit)="onSubmit($event)" *ngIf="isVisibleForm()">
+            
+            <div>
+                <div class="form-question-numero" *ngFor="let option of formQuestion">
+                    <div *ngIf="isVisibleSelect(option)">
+                        <p>{{ option.id }} – {{ option.nome }}*</p>
+                        <mat-radio-group formControlName="{{ option.position }}">
+                            <mat-radio-button class="form-question-option" *ngFor="let m of option.question; let k = index" [value]="m.descBreve" [checked]="checked(option, k, option.position)">
+                                {{ m.descBreve }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div *ngIf="!isVisibleSelect(option)">
+                        <p>{{ option.id }} – {{ option.nome }} </p>
+                       
+                        <div *ngFor="let m of option.question; let k = index">
+                            <p color="color-grey" [ngClass]="{'color-red': optionQuestion('questionA' + k )}">{{ m.descBreve }}</p>
+                            <mat-form-field appearance="fill" class="col-6">
+                                <mat-label >Escolha Resposta</mat-label>
+                                <mat-select formControlName="{{ 'questionA' + k }}" required>
+                                    <mat-option *ngFor="let model of flagTipoOperacao" value="{{ model.label }}">{{ model.value }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-question-button">
+                <ecm-back-button (emitterEvent)="back()" label="VOLTAR"></ecm-back-button>
+                <button mat-flat-button class="btn-lg form-question-color" [disabled]="formGroup.invalid" 
+                    type="submit" *ngIf="isVisibleSalvar()">SALVAR</button>
+                <button mat-flat-button class="btn-lg form-question-color" (click)="update()" 
+                    [disabled]="formGroup.invalid" type="button" *ngIf="!isVisibleSalvar()">EDITAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+

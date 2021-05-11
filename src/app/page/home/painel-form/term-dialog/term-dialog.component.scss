@@ -1,0 +1,35 @@
+.dialog {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    text-align: justify;
+
+    &-title {
+        font-weight: bold;
+        text-align: center;
+        color: var(--color-primaria);
+    }
+
+    &-description {
+        padding: 5px;
+    }
+
+    &-radio {
+        text-align: center;
+        padding: 5px;
+        border-top: 1px dashed var(--color-segudaria);
+    }
+
+    &-button {
+        text-align: center;
+        padding: 5px;
+    }
+
+    &-button-color {
+        background-color: orange;
+        color: white;
+    }
+}
+
+.float-right {
+    float:right;
+}
