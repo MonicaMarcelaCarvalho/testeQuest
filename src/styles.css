@@ -1,0 +1,7 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --color-primaria: rgb(167, 45, 66); 
+    --color-segudaria: #e5e5e5;
+}
